@@ -3,12 +3,8 @@ import os
 import random
 
 """
-
     Implementation of DSSE
-
 """
-
-
 class My_cl_dsse:
 
     # creating a salt and a key/secretkey
