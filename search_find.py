@@ -1,25 +1,24 @@
-
 from sys import path
 
 
-def unique_words(self,path):
+def unique_words(self, path):
 
-    text_file = open(path, 'r')
+    text_file = open(path, "r")
     text = text_file.read()
 
-    #cleaning
+    # cleaning
     text = text.lower()
     words = text.split()
-    words = [word.strip('.,!;()[]') for word in words]
-    words = [word.replace("'s", '') for word in words]
+    words = [word.strip(".,!;()[]") for word in words]
+    words = [word.replace("'s", "") for word in words]
 
-    #finding unique
+    # finding unique
     unique = []
     for word in words:
         if word not in unique:
             unique.append(word)
 
-    #sort
+    # sort
     unique.sort()
 
     return len(unique)

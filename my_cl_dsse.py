@@ -1,79 +1,75 @@
+import json
 import os
 import random
-import json
- 
 
-'''
+"""
 
     Implementation of DSSE
 
-'''
+"""
+
 
 class My_cl_dsse:
 
-    #creating a salt and a key/secretkey
-    #Everytime the script is run, a new salt secret key is generated and copied to the key.json file
+    # creating a salt and a key/secretkey
+    # Everytime the script is run, a new salt secret key is generated and copied to the key.json file
     def keygen(self):
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         chars = [random.choice(ALPHABET) for _ in range(35)]
         sk = "".join(chars)
-    #the key is saved in a key.json file.
-        with open('key.json', 'w') as f:
+        # the key is saved in a key.json file.
+        with open("key.json", "w") as f:
             json.dump(sk, f)
 
         return sk
-    
-   
-#This fuction returns the total size of the dataset
-    def size(self,path,*args,**kwargs): 
-        #initialize the size
+
+    # This fuction returns the total size of the dataset
+    def size(self, path, *args, **kwargs):
+        # initialize the size
         total_size = 0
-        
-        #use the walk() method to navigate through directory tree
+
+        # use the walk() method to navigate through directory tree
         for dirpath, dirnames, filenames in os.walk(path):
             for i in filenames:
-                
-                #use join to concatenate all the components of path
+
+                # use join to concatenate all the components of path
                 f = os.path.join(dirpath, i)
-                
-                #use getsize to generate size in bytes and add it to the total size
+
+                # use getsize to generate size in bytes and add it to the total size
                 total_size += os.path.getsize(f)
 
         return total_size
 
+    # This code counts the number of files in the dataset
 
-#This code counts the number of files in the dataset
-
-    def get_count(self,path,*args,**kwargs):
+    def get_count(self, path, *args, **kwargs):
         count = 0
         for dirpath, dirnames, filenames in os.walk(path):
             for _ in filenames:
                 count += 1
         return count
 
+    # from sys import path
+    # Counts the number in a data file.
 
+    def unique_words(self, path):
 
-#from sys import path
-#Counts the number in a data file.
-
-    def unique_words(self,path):
-
-        text_file = open(path, 'r')
+        text_file = open(path, "r")
         text = text_file.read()
 
-        #cleaning
+        # cleaning
         text = text.lower()
         words = text.split()
-        words = [word.strip('.,!;()[]') for word in words]
-        words = [word.replace("'s", '') for word in words]
+        words = [word.strip(".,!;()[]") for word in words]
+        words = [word.replace("'s", "") for word in words]
 
-        #finding unique
+        # finding unique
         unique = []
         for word in words:
             if word not in unique:
                 unique.append(word)
 
-        #sort
+        # sort
         unique.sort()
 
         return len(unique)

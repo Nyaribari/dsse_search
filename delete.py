@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import dsse_client
-import dsse_server
 import pickle
 import sys
+
+import dsse_client
+import dsse_server
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -24,6 +25,6 @@ if __name__ == "__main__":
         print("{} was not removed").format(sys.argv[1])
     else:
         print("Removal of {} successful").format(ret)
-    
+
     # We are responsible for writing back changes.
     server.updatedatabases()
